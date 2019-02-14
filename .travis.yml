@@ -1,0 +1,30 @@
+language: minimal
+sudo: required
+services:
+  - docker
+before_script:
+  - tag="${TRAVIS_TAG:-latest}"
+  - image_name="$(echo "${TRAVIS_REPO_SLUG}" | cut -d '/' -f 2)"
+  - docker_org="actions"
+script: .travis/build.sh $docker_org $tag
+before_deploy:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+deploy:
+  - provider: script
+    script: .travis/deploy.sh $docker_org $tag
+    on:
+      branch: master
+  - provider: script
+    script: .travis/deploy.sh $docker_org $tag
+    on:
+      branch: master
+      tags: true
+env:
+  - WORKER=1 MAX_WORKERS=8
+  - WORKER=2 MAX_WORKERS=8
+  - WORKER=3 MAX_WORKERS=8
+  - WORKER=4 MAX_WORKERS=8
+  - WORKER=5 MAX_WORKERS=8
+  - WORKER=6 MAX_WORKERS=8
+  - WORKER=7 MAX_WORKERS=8
+  - WORKER=8 MAX_WORKERS=8

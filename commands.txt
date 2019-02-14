@@ -1,0 +1,1 @@
+export IMAGE_NAME=fzf;                 export IMAGE_TAG=0.17.5;   export SOURCES="https://launchpad.net/ubuntu/+source/fzf/0.17.5-2/+build/16252259/+files/fzf_0.17.5-2_amd64.deb"
