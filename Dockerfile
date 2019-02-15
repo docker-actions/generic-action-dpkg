@@ -2,14 +2,15 @@ ARG ROOTFS=/build/rootfs
 
 FROM ubuntu:bionic as build
 
-ARG SOURCES=""
-ARG IMAGE_NAME=""
+ARG SOURCES
+ARG IMAGE_NAME
 ARG ROOTFS
 
 ENV BUILD_DEBS /build/debs
 ENV DEBIAN_FRONTEND noninteractive
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE true
 
+RUN : "${SOURCES:?Build argument needs to be set and non-empty.}"
 RUN : "${IMAGE_NAME:?Build argument needs to be set and non-empty.}"
 RUN : "${ROOTFS:?Build argument needs to be set and non-empty.}"
 
